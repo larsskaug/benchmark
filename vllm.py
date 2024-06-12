@@ -1,8 +1,13 @@
-
 from vllm import LLM, SamplingParams
 
-llm = LLM(model="TheBloke/mixtral-8x7b-v0.1-AWQ", gpu_memory_utilization=0.95, kv_cache_dtype="fp8", enable_chunked_prefill=True, max_num_batched_tokens=8192)
-
+llm = LLM(model="TheBloke/mixtral-8x7b-v0.1-AWQ", 
+          gpu_memory_utilization=0.95, 
+          quantization="AWQ",  
+          #kv_cache_dtype="fp8", 
+          enforce_eager=True,
+          enable_chunked_prefill=True, 
+          max_num_batched_tokens=8192
+         )
 
 # Create a sampling params object.
 sampling_params = SamplingParams(temperature=0.8, top_p=0.95)
